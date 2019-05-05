@@ -1,0 +1,20 @@
+version: '3'
+services:
+  web:
+    build: 
+      context: .
+      dockerfile: Dockerfile.dev #location of dockerlie
+    ports:
+      - "3000:3000"
+    volumes:
+        - /app/node_modules #only look for this folder inside container
+        - .:/app #map current directory(.) with the (:) container like port mapping
+  tests:
+    build: 
+      context: .
+      dockerfile: Dockerfile.dev #location of dockerlie
+    volumes:
+        - /app/node_modules 
+        - .:/app 
+    command: ["npm","run","test"]
+      
